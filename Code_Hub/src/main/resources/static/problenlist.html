@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Problems</title>
+    <link rel="stylesheet" href="problem.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<nav class="navbar">
+    <img class="logo" src="logo.jpg">
+    <ul class="menu-links">
+        <li><a href="homepage.html">Home</a></li>
+    </ul>
+</nav>
+<div class="problem-container">
+    <aside class="sidebar">
+        <div class="menu">
+            <button class="menu-btn">Menu</button>
+            <div class="menu-content">
+                <a href="solverProfile.html" class="myProfileForSolvers">My profile</a>
+                <a href="allSolvers.html">Solvers</a>
+            </div>
+        </div>
+        <div class="quizzes">
+            <h3>Solved By Me</h3>
+            <button class="quiz-btn">⚡</button>
+        </div>
+        <div class="stats">
+            <h3>Stats</h3>
+            <div class="stat-item active" id="alllev">
+                <span>All</span>
+                <progress value="7" max="28" class="alllevprogress"></progress>
+            </div>
+            <div class="stat-item" id="easy">
+                <span>Easy</span>
+                <progress value="7" max="28" class="easyprogress"></progress>
+            </div>
+            <div class="stat-item" id="medium">
+                <span>Medium</span>
+                <progress id="prog"  value="17" max="101" class="medprogress"></progress>
+            </div>
+            <div class="stat-item" id="hard">
+                <span>Hard</span>
+                <progress value="2" max="21" class="hardprogress"></progress>
+            </div>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="progress-header">
+            <span class="outof">26 / 150</span>
+            <progress value="26" max="150" class="headprogress"></progress>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search problem names.." class="searching">
+            <button class="search-btn">🔍</button>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">All Platform</button>
+            <div class="dropdown-content">
+                <a href="#" class="allweb">All</a>
+            </div>
+        </div>
+
+        <a href="adminUploadProblems.html" class="upprob">Upload a new problem</a>
+
+        <div class="category-list">
+            <div class="category-item">
+                <div class="category-header">
+                    <span class="selcat">All Category</span>
+                    <progress value="9" max="9" class="catprogress"></progress>
+                    <div class="category-content">
+                        <a href="#" class="allcat">All</a>
+                    </div>
+                </div>
+                <div class="problems-list">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Problem</th>
+                            <th>Platform</th>
+                            <th>Link</th>
+                            <th>Difficulty</th>
+                            <th>Tutorial</th>
+                            <th>Your solution</th>
+                        </tr>
+                        </thead>
+                        <tbody class="one_problem">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="prevnext">
+                    <button class="previousnone" id="previous">Previous</button>
+                    <button class="next" id="next">Next</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+<div class="notice"></div>
+<footer class="section footer">
+    <div class="footer-container container">
+        <div class="footer-content">
+            <a href="#" class="logo-content flex">
+                <span class="logo-text">CodingHub</span>
+            </a>
+
+            <p class="content-description">"Crafting Code with Precision, Creating Innovation with Passion."</p>
+
+
+        </div>
+
+        <div class="footer-linkContent">
+            <ul class="footer-links">
+                <h4 class="footerLinks-title">Websites</h4>
+
+                <li><a href="https://codeforces.com/" class="footer-link">Codeforces</a></li>
+                <li><a href="https://leetcode.com/" class="footer-link">Leetcode</a></li>
+                <li><a href="https://atcoder.jp/" class="footer-link">Atcoder</a></li>
+                <li><a href="https://www.codechef.com/" class="footer-link">Codechef</a></li>
+            </ul>
+            <ul class="footer-links">
+                <h4 class="footerLinks-title">Support</h4>
+
+                <li><a href="FAQs.html" class="footer-link">FAQs</a></li>
+                <li><a href="#" class="footer-link">Private Policy</a></li>
+                <li><a href="terms&con.html" class="footer-link">Help Us</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-copyRight">&#169; CodingHub. All rigths reserved</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"
+        integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="Problem.js"></script>
+</body>
+</html>
+

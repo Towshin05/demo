@@ -1,0 +1,274 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solver Profile</title>
+    <link rel="stylesheet" href="solverProfileStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 120px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .profile-info h2 {
+            margin: 0;
+            color: rgb(108, 108, 198);
+        }
+
+        .profile-info p {
+            margin: 5px 0 0;
+        }
+
+        .profile-details {
+            margin-top: 20px;
+        }
+
+        .profile-item {
+            margin-bottom: 10px;
+        }
+
+        .about {
+            margin-top: 20px;
+        }
+
+        .about h3 {
+            margin-top: 0;
+            color: rgb(108, 108, 198);
+        }
+        .about p{
+            margin-top: 10px;
+        }
+        .total-solved{
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .row1{
+            margin-top: 10px;
+            display: flex;
+            gap: 60px;
+        }
+        .row2{
+            margin-top: 5px;
+            display: flex;
+            gap: 68px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <img class="logo" src="logo.jpg">
+    <ul class="menu-links">
+        <li><a href="homepage.html">Home</a></li>
+    </ul>
+</nav>
+
+<div class="profile-container">
+    <div class="profile-header">
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Profile Picture" class="profile-pic">
+        <div class="profile-info">
+
+        </div>
+    </div>
+
+</div>
+
+<footer class="section footer">
+    <div class="footer-container container">
+        <div class="footer-content">
+            <a href="#" class="logo-content flex">
+                <span class="logo-text">CodingHub</span>
+            </a>
+
+            <p class="content-description">"Crafting Code with Precision, Creating Innovation with Passion."</p>
+
+
+        </div>
+
+        <div class="footer-linkContent">
+            <ul class="footer-links">
+                <h4 class="footerLinks-title">Websites</h4>
+
+                <li><a href="https://codeforces.com/" class="footer-link">Codeforces</a></li>
+                <li><a href="https://leetcode.com/" class="footer-link">Leetcode</a></li>
+                <li><a href="https://atcoder.jp/" class="footer-link">Atcoder</a></li>
+                <li><a href="https://www.codechef.com/" class="footer-link">Codechef</a></li>
+            </ul>
+            <ul class="footer-links">
+                <h4 class="footerLinks-title">Support</h4>
+
+                <li><a href="FAQs.html" class="footer-link">FAQs</a></li>
+                <li><a href="#" class="footer-link">Private Policy</a></li>
+                <li><a href="terms&con.html" class="footer-link">Help Us</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-copyRight">&#169; CodingHub. All rigths reserved</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"
+        integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        console.log("DOM loaded successfully")
+        const makeRequest = async (config) => {
+            try {
+                return await axios(config);
+            } catch (error) {
+                console.error("Error making request:", error);
+            }
+        }
+
+        let username = sessionStorage.getItem("visitedUserName")
+        if(username==null){
+            window.location.href = "/home"
+        }
+        console.log(username)
+        const getData = () => {
+            makeRequest({
+                method: 'get',
+                url: `/solverProfile?user_name=${username}`
+            })
+                .then((res) => {
+                    console.log(res)
+                    const profileContainer = document.querySelector('.profile-container')
+                    const profileInfo = document.querySelector('.profile-info')
+                    const myName = document.createElement('h2')
+                    myName.textContent = res.data.solver.user_name
+                    profileInfo.appendChild(myName)
+                    const profileDetails = document.createElement('div')
+                    profileDetails.classList.add('profile-details')
+
+                    const profileItems = [
+                        { label: 'Username:', value: res.data.solver.user_name},
+                        { label: 'Name:', value: res.data.solver.Name || ''},
+                        { label: 'Institution:', value: res.data.solver.institution || ''},
+                        { label: 'Email:', value: res.data.solver.email_address || ''},
+                        { label: 'Address:', value: res.data.solver.address || ''}
+                    ];
+                    profileItems.forEach(item => {
+                        const profileItem = document.createElement('div');
+                        profileItem.classList.add('profile-item');
+
+                        const strong = document.createElement('strong');
+                        strong.textContent = item.label;
+
+                        profileItem.appendChild(strong);
+                        profileItem.appendChild(document.createTextNode(` ${item.value}`));
+
+                        profileDetails.appendChild(profileItem);
+                    });
+
+                    const intro = document.createElement('div')
+                    intro.classList.add('about')
+
+                    const aboutMe = document.createElement('h3')
+                    aboutMe.textContent = 'About Me'
+
+                    const myIntro = document.createElement('p')
+                    myIntro.textContent = res.data.solver.introduction
+
+                    const solved = document.createElement('div')
+                    solved.classList.add('total-solved')
+                    const total = document.createElement('h3')
+                    total.textContent = 'Total problems solved:'
+                    const num = document.createElement('h3')
+                    num.textContent = res.data.problemSolved
+                    solved.appendChild(total)
+                    solved.appendChild(num)
+
+                    const totalByWeb = res.data.totalByWeb
+
+                    const webRow1 = document.createElement('div')
+                    webRow1.classList.add("row1")
+
+                    const web1 = document.createElement('div')
+                    const number1 = document.createElement('h3')
+                    number1.textContent = totalByWeb["Codeforces"] || 0
+                    number1.style.color = 'rgb(39,39,134)'
+                    number1.style.paddingLeft = '35px'
+                    const webname1 = document.createElement('h3')
+                    webname1.textContent = "Codeforces"
+                    webname1.style.color = '#646363'
+                    web1.appendChild(number1)
+                    web1.appendChild(webname1)
+
+                    const web2 = document.createElement('div')
+                    const number2 = document.createElement('h3')
+                    number2.textContent = totalByWeb["LeetCode"] || 0
+                    number2.style.color = 'rgb(39,39,134)'
+                    number2.style.paddingLeft = '30px'
+                    const webname2 = document.createElement('h3')
+                    webname2.textContent = "LeetCode"
+                    webname2.style.color = '#646363'
+                    web2.appendChild(number2)
+                    web2.appendChild(webname2)
+
+                    webRow1.appendChild(web1)
+                    webRow1.appendChild(web2)
+
+
+                    const webRow2 = document.createElement('div')
+                    webRow2.classList.add("row2")
+
+                    const web3 = document.createElement('div')
+                    const number3 = document.createElement('h3')
+                    number3.textContent = totalByWeb["CodeChef"] || 0
+                    number3.style.paddingLeft = '35px'
+                    number3.style.color = 'rgb(39,39,134)'
+                    const webname3 = document.createElement('h3')
+                    webname3.textContent = "CodeChef"
+                    webname3.style.color = '#646363'
+                    web3.appendChild(number3)
+                    web3.appendChild(webname3)
+
+                    const web4 = document.createElement('div')
+                    const number4 = document.createElement('h3')
+                    number4.textContent = totalByWeb["AtCoder"] || 0
+                    number4.style.paddingLeft = '30px'
+                    number4.style.color = 'rgb(39,39,134)'
+                    const webname4 = document.createElement('h3')
+                    webname4.style.color = '#646363'
+                    webname4.textContent = "AtCoder"
+                    web4.appendChild(number4)
+                    web4.appendChild(webname4)
+
+                    webRow2.appendChild(web3)
+                    webRow2.appendChild(web4)
+
+                    intro.appendChild(aboutMe)
+                    intro.appendChild(myIntro)
+                    intro.appendChild(solved)
+                    intro.appendChild(webRow1)
+                    intro.appendChild(webRow2)
+
+                    profileContainer.appendChild(profileDetails);
+                    profileContainer.appendChild(intro)
+                })
+        }
+        getData()
+    })
+</script>
+</body>
+</html>
